@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lab name="Mac-off and port security" version="1" scripttimeout="300" lock="0">
+  <topology>
+    <nodes>
+      <node id="2" name="Linux" type="qemu" template="linux" image="linux-kali-2024.3" console="vnc" cpu="2" cpulimit="0" ram="4096" ethernet="1" uuid="e89f5e3c-79d4-4906-a463-7df9c1963d2a" firstmac="00:50:00:00:02:00" qemu_options="-machine type=pc,accel=kvm -vga std -usbdevice tablet -boot order=cd -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server-2D-Linux-S.svg" config="0" left="126" top="162">
+        <interface id="0" name="e0" type="ethernet" network_id="2"/>
+      </node>
+      <node id="1" name="SW" type="iol" template="iol" image="i86bi-linux-l2-adventerprisek9-15.1a.bin" ethernet="1" nvram="1024" ram="1024" serial="0" console="" delay="0" icon="Switch2.png" config="1" left="459" top="228">
+        <interface id="0" name="e0/0" type="ethernet" network_id="2"/>
+        <interface id="32" name="e0/2" type="ethernet" network_id="3"/>
+      </node>
+      <node id="4" name="VPC4" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="PC-2D-Desktop-Generic-S.svg" config="0" left="672" top="315"/>
+      <node id="5" name="VPC5" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="PC-2D-Desktop-Generic-S.svg" config="0" left="681" top="84">
+        <interface id="0" name="eth0" type="ethernet" network_id="3"/>
+      </node>
+      <node id="3" name="VPC" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="PC-2D-Desktop-Generic-S.svg" config="0" left="444" top="336"/>
+    </nodes>
+    <networks>
+      <network id="2" type="bridge" name="Net-Linuxiface_0" left="324" top="406" visibility="0" icon="lan.png"/>
+      <network id="3" type="bridge" name="Net-VPC5iface_0" left="690" top="276" visibility="0" icon="lan.png"/>
+    </networks>
+  </topology>
+  <objects>
+    <textobjects>
+      <textobject id="1" name="txt 1" type="text">
+        <data>PGRpdiBpZD0iY3VzdG9tVGV4dDEiIGNsYXNzPSJjdXN0b21TaGFwZSBjdXN0b21UZXh0IGNvbnRleHQtbWVudSB1aS1yZXNpemFibGUganRrLWRyYWdnYWJsZSBkcmFnc3RvcHBlZCIgZGF0YS1wYXRoPSIxIiBzdHlsZT0iZGlzcGxheTogaW5saW5lOyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IDc1OXB4OyB0b3A6IDk5cHg7IGN1cnNvcjogbW92ZTsgei1pbmRleDogMTAwMTsiPjxwIGFsaWduPSJjZW50ZXIiIHN0eWxlPSJ2ZXJ0aWNhbC1hbGlnbjp0b3A7Y29sb3I6IzAwMDAwMDtiYWNrZ3JvdW5kLWNvbG9yOiNmZmZmZmY7Zm9udC1zaXplOjEycHg7Zm9udC13ZWlnaHQ6IG5vcm1hbDsiPiAxMC4xMC4xMC4xMCAgICAgICAgPC9wPjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLWUiIHN0eWxlPSJ6LWluZGV4OiA5MDsiPjwvZGl2PjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLXMiIHN0eWxlPSJ6LWluZGV4OiA5MDsiPjwvZGl2PjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLXNlIHVpLWljb24gdWktaWNvbi1ncmlwc21hbGwtZGlhZ29uYWwtc2UiIHN0eWxlPSJ6LWluZGV4OiA5MDsiPjwvZGl2PjwvZGl2Pg==</data>
+      </textobject>
+      <textobject id="2" name="txt 2" type="text">
+        <data>PGRpdiBpZD0iY3VzdG9tVGV4dDIiIGNsYXNzPSJjdXN0b21TaGFwZSBjdXN0b21UZXh0IGNvbnRleHQtbWVudSBqdGstZHJhZ2dhYmxlIGRyYWdzdG9wcGVkIHVpLXJlc2l6YWJsZS1hdXRvaGlkZSIgZGF0YS1wYXRoPSIyIiBzdHlsZT0iZGlzcGxheTogaW5saW5lOyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IDczOHB4OyB0b3A6IDMyN3B4OyBjdXJzb3I6IG1vdmU7IHotaW5kZXg6IDEwMDE7IGhlaWdodDogMjRweDsgd2lkdGg6IGF1dG87Ij48cCBhbGlnbj0iY2VudGVyIiBzdHlsZT0idmVydGljYWwtYWxpZ246dG9wO2NvbG9yOiMwMDAwMDA7YmFja2dyb3VuZC1jb2xvcjojZmZmZmZmO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtd2VpZ2h0OiBub3JtYWw7IiBjb250ZW50ZWRpdGFibGU9ImZhbHNlIiBjbGFzcz0iIj4gMTAuMTAuMTAuMTE8L3A+PC9kaXY+</data>
+      </textobject>
+    </textobjects>
+    <configs>
+      <config id="1">CiEKISBMYXN0IGNvbmZpZ3VyYXRpb24gY2hhbmdlIGF0IDA3OjIwOjU2IFVUQyBUaHUgT2N0IDE3IDIwMjQKIQp2ZXJzaW9uIDE1LjEKc2VydmljZSB0aW1lc3RhbXBzIGRlYnVnIGRhdGV0aW1lIG1zZWMKc2VydmljZSB0aW1lc3RhbXBzIGxvZyBkYXRldGltZSBtc2VjCm5vIHNlcnZpY2UgcGFzc3dvcmQtZW5jcnlwdGlvbgpzZXJ2aWNlIGNvbXByZXNzLWNvbmZpZwohCmhvc3RuYW1lIFN3aXRjaAohCmJvb3Qtc3RhcnQtbWFya2VyCmJvb3QtZW5kLW1hcmtlcgohCiEKIQpubyBhYWEgbmV3LW1vZGVsCiEKaXAgY2VmCiEKIQpubyBpcHY2IGNlZgppcHY2IG11bHRpY2FzdCBycGYgdXNlLWJncAohCiEKIQohCiEKIQohCnNwYW5uaW5nLXRyZWUgbW9kZSBwdnN0CnNwYW5uaW5nLXRyZWUgZXh0ZW5kIHN5c3RlbS1pZAohCiEKIQohCnZsYW4gaW50ZXJuYWwgYWxsb2NhdGlvbiBwb2xpY3kgYXNjZW5kaW5nCiEKISAKIQohCiEKIQohCiEKIQohCmludGVyZmFjZSBFdGhlcm5ldDAvMAogbm8gc2h1dGRvd24KIHN3aXRjaHBvcnQgbW9kZSBhY2Nlc3MKIHN3aXRjaHBvcnQgcG9ydC1zZWN1cml0eQogZHVwbGV4IGF1dG8KIQppbnRlcmZhY2UgRXRoZXJuZXQwLzEKIG5vIHNodXRkb3duCiBzd2l0Y2hwb3J0IG1vZGUgYWNjZXNzCiBzd2l0Y2hwb3J0IHBvcnQtc2VjdXJpdHkKIGR1cGxleCBhdXRvCiEKaW50ZXJmYWNlIEV0aGVybmV0MC8yCiBubyBzaHV0ZG93bgogc3dpdGNocG9ydCBtb2RlIGFjY2Vzcwogc3dpdGNocG9ydCBwb3J0LXNlY3VyaXR5CiBkdXBsZXggYXV0bwohCmludGVyZmFjZSBFdGhlcm5ldDAvMwogbm8gc2h1dGRvd24KIGR1cGxleCBhdXRvCiEKIQpubyBpcCBodHRwIHNlcnZlcgohCiEKIQohCiEKY29udHJvbC1wbGFuZQohCiEKbGluZSBjb24gMAogbG9nZ2luZyBzeW5jaHJvbm91cwpsaW5lIGF1eCAwCmxpbmUgdnR5IDAgNAogbG9naW4KIQplbmQK</config>
+    </configs>
+  </objects>
+  <objects/>
+</lab>
